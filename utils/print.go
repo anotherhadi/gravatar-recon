@@ -133,6 +133,10 @@ func PrintTitle(title string) {
 	fmt.Println(titleStyle.Render(title) + "\n")
 }
 
+func PrintNoResultFound() {
+	fmt.Println(titleStyle.Render("No result found"))
+}
+
 func PrintAvatar(url string) {
 	if url == "" {
 		return

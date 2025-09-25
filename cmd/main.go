@@ -58,12 +58,15 @@ func main() {
 	}
 
 	profiles, err := gravatar_recon.GetGravatarProfiles(email)
-	if err != nil {
+	if err != nil || profiles == nil {
 		log.Fatal("Failed to get Gravatar profile", "err", err)
 	}
 
 	if !*silent {
 		utils.Header()
+		if len(*profiles) == 0 {
+			utils.PrintNoResultFound()
+		}
 		for _, profile := range *profiles {
 			utils.PrintTitle(profile.PreferredUser + ":")
 			if *printAvatar {

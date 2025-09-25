@@ -91,6 +91,10 @@ func GetGravatarProfiles(email string) (*[]GravatarProfile, error) {
 	}
 	defer resp.Body.Close()
 
+	if resp.StatusCode == 404 {
+		return &[]GravatarProfile{}, nil
+	}
+
 	if resp.StatusCode != 200 {
 		return nil, fmt.Errorf("no gravatar profile found (status %d)", resp.StatusCode)
 	}
